@@ -9,8 +9,13 @@
 /* General */
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: rgb(30, 28, 54);
+    background-image: linear-gradient(45deg, rgb(30, 28, 54), rgb(75, 72, 109));
     color: aliceblue;
+}
+
+.welcome, .new-book-button, .books {
+    background-color: rgba(255, 235, 205, 0.079);
+    border: 1px solid white;
 }
 
 
@@ -20,20 +25,71 @@ body {
     flex-direction: column;
     justify-self: center;
     gap: 6px;
-    margin: 2rem;
+    margin: 2rem 2rem 1rem 2rem;
     padding: 2rem;
     width: 60%;
-    background-color: rgba(255, 235, 205, 0.079);
+    
     border-radius: 32px;
     text-align: center;
     font-size: 1.2rem;
-    border: 1px solid white;
 }
 
 #cursive {
     margin-top: 1rem;
     font-size: 1rem;
 }
+
+
+/* Add new book button */
+.new-book-button {
+    display: flex;
+    justify-self: center;
+    color: aliceblue;
+    border-radius: 12px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.new-book-button:hover {
+    background-color: rgba(255, 235, 205, 0.118);
+    cursor: pointer;
+}
+
+.new-book-button:active {
+    background-color: rgba(255, 235, 205, 0.188);
+    cursor: pointer;
+    margin: 1.1rem 0 -0.1rem 0;
+}
+
+
+/* Dialog Window */
+#dialog {
+    justify-self: center;
+    align-self: center;
+    border: 1px solid white;
+    background-image: linear-gradient(90deg, rgba(255, 235, 205, 0.188), white);
+}
+
+#dialog form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 2rem;
+    color: aliceblue;
+    background-color: rgb(85, 75, 102);
+    font-size: 1.2rem;
+    background-image: linear-gradient(60deg, rgba(38, 28, 65, 0.732), rgba(255, 255, 255, 0.314));
+}
+
+#dialog input {
+    background-color: rgba(209, 202, 222, 0.836);
+    color: rgba(0, 0, 0, 0.74);
+    border: none;
+    padding: 0.2rem 0.4rem;
+    font-size: 1.1rem;
+}
+
 
 /* Books Section */
 .books {
@@ -42,12 +98,10 @@ body {
     justify-self: center;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 235, 205, 0.079);
     margin: 2rem;
     padding: 4rem;
     width: clamp(400px, 90vw, 100rem);
     border-radius: 16px;
     text-align: center;
-    border: 1px solid white;
 }
 
