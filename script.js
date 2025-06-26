@@ -2,7 +2,11 @@
 const books = document.querySelector('.books');
 const newBookBtn = document.getElementById('new-book');
 const dialog = document.getElementById("dialog");
-
+const bookTitle = document.getElementById('book-name');
+const bookAuthor = document.getElementById('book-author');
+const bookPages = document.getElementById('book-pages');
+const bookRead = document.getElementById('book-read');
+const closeBtn = document.querySelector('.close-button');
 
 // Books array
 const myLibrary = [];
@@ -40,13 +44,18 @@ newBookBtn.addEventListener("click", () => {
     dialog.showModal();
 });
 
-// Add new book close button
+// Form close button
+closeBtn.addEventListener("click", (e) => {
+    e.preventdDefault();
+    dialog.close();
+});
 
 
 
 // Add books to a library array
 function addBookToLibrary(title, author, pages, read) {
     // take parameters, create a book and then store it in the array
+    
 
 }
 
