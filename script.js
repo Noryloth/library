@@ -4,7 +4,7 @@ const dialog = document.getElementById("dialog");
 const form = document.querySelector("form");
 const closeBtn = document.querySelector('.close-button');
 const submitBtn = document.querySelector('.submit-button');
-
+const clearBtn = document.querySelector('.clear-button');
 
 
 // Books array
@@ -30,32 +30,18 @@ function displayBooks(myLibrary) {
         const bookItem = document.createElement('div');
         bookItem.className = "bookItem";
 
-        const bookTitle = document.createElement('h1');
-        bookTitle.innerText = `${book.title}`;
+        bookItem.innerHTML = `
+            <div> 
+                <h1 class="title">${book.title}</h1>
+                <h3 class=author">${book.author}</h3>
+                <p>${book.pages} pages total</p>
+                <h4 class="read">${book.read ? "You have read this book." : "You have not read this book yet"}</p>
+            </div>
+            <div class=book-buttons>
+                <button class="remove-button" onclick="removeBook(${i})">Remove book</button>
+                <button class="read-status" onclick="toggleRead(${i})">Mark as read</button>
+            </div>`
 
-        const bookAuthor = document.createElement('h3');
-        bookAuthor.innerText = `${book.author}`;
-
-        const bookPages = document.createElement('p');
-        bookPages.innerText = `(${book.pages} pages total)`;
-
-        const bookRead = document.createElement('h4');
-        bookRead.className = "bookRead";
-        book.read ? bookRead.innerText = "You have read this book." : bookRead.innerText = "You have not read this book yet.";
-
-        const rmvBtn = document.createElement('button');
-        rmvBtn.className = "remove-button";
-        rmvBtn.innerText = "Remove book"
-
-        rmvBtn.addEventListener("on click", () => {
-            removeBook([i]);
-        });
-
-        bookItem.appendChild(bookTitle);
-        bookItem.appendChild(bookAuthor);
-        bookItem.appendChild(bookPages);
-        bookItem.appendChild(bookRead);
-        bookItem.appendChild(rmvBtn);
         library.appendChild(bookItem);
     }
 }
@@ -73,6 +59,7 @@ closeBtn.addEventListener("click", (event) => {
     dialog.close();
 });
 
+
 // Form submit button
 form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -83,30 +70,54 @@ form.addEventListener("submit", (event) => {
     const read = document.getElementById('book-read').checked;
 
     const newBook = new Book(title, author, pages, read);
-    
+
+    // Show a message when user input is empty
+    if (title === '' || author === '' || pages === '') {
+        alert('Please, write information about a book.');
+    } else {
     addBookToLibrary(newBook);
     dialog.close();
     clearForm();
-
-    // console.log(myLibrary);
-})
+    }
+});
 
 
 // Add books to a library array
 function addBookToLibrary(newBook) {
-    // take parameters, create a book and then store it in the array
     myLibrary.push(newBook);
 
     displayBooks(myLibrary);
 }
 
+
+// Clear form
 function clearForm() {
     document.getElementById('book-title').value = '';
     document.getElementById('book-author').value = '';
     document.getElementById('book-pages').value = '';
 }
 
-function removeBook(index) {
-    myLibrary.splice(index, 1);
-    displayBooks();
+
+// Remove book button
+function removeBook(i) {
+    myLibrary.splice(i, 1);
+    displayBooks(myLibrary);
 }
+
+
+// Toggle read status
+Book.prototype.toggleRead = function() {
+    this.read = !this.read;
+}
+
+function toggleRead(i) {
+    myLibrary[i].toggleRead();
+    displayBooks(myLibrary);
+}
+
+
+// Clear button
+clearBtn.addEventListener("click", () => {
+    myLibrary.splice(0, myLibrary.length);
+    displayBooks(myLibrary);
+});
