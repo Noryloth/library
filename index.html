@@ -22,17 +22,21 @@
     </div>
     <dialog id="dialog">
       <form method="dialog">
-        <label for="book-name">Name of the book:</label>
-        <input type="text" name="book-name" id="book-name" />
+        <label for="book-title">Name of the book:</label>
+        <input type="text" name="title" id="book-title" placeholder="The Hobbit"/>
 
         <label for="book-author">Author of the book:</label>
-        <input type="text" name="book-author" id="book-author" />
+        <input type="text" name="author" id="book-author" placeholder="J.R.R. Tolkien"/>
 
         <label for="book-pages">Amount of pages:</label>
-        <input type="number" name="book-pages" id="book-pages" />
+        <input type="number" name="pages" id="book-pages" placeholder="295"/>
 
         <label for="book-read">Read yet:</label>
-        <input type="checkbox" name="book-read" id="book-author" />
+        <input type="checkbox" name="read" id="book-read" />
+        <div class="lower-buttons">
+          <button class="close-button">Cancel</button>
+          <button class="submit-button" type="submit">OK</button>
+        </div>
       </form>
     </dialog>
     <button class="new-book-button" id="new-book">Add new book</button>
