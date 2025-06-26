@@ -31,7 +31,6 @@ body {
     margin: 2rem 2rem 1rem 2rem;
     padding: 2rem;
     width: 60%;
-    
     border-radius: 32px;
     text-align: center;
     font-size: 1.2rem;
@@ -95,6 +94,39 @@ body {
     font-size: 1.1rem;
 }
 
+#dialog input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    justify-self: center;
+}
+
+
+/* Close and OK buttons */
+.lower-buttons {
+    display: flex;
+    grid-column: 1 / 3;
+    justify-self: center;
+    margin-top: 1rem;
+    gap: 10px;
+}
+
+.close-button, .submit-button {
+    background-color: aliceblue;
+    padding: 0.25rem;
+    font-size: 1.05rem;
+    border: none;
+    border-radius: 2px;
+}
+
+.close-button:hover, .submit-button:hover {
+    background-color: rgba(240, 248, 255, 0.848);
+}
+
+.close-button:active, .submit-button:active {
+    background-color: rgba(240, 248, 255, 0.705);
+    margin-top: 0.1rem;
+    margin-bottom: -0.1rem;
+}
 
 /* Books Section */
 .books {
