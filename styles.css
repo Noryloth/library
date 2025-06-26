@@ -43,7 +43,7 @@ body {
 
 
 /* Add new book button */
-.new-book-button {
+.new-book-button, .remove-button {
     display: flex;
     justify-self: center;
     color: aliceblue;
@@ -140,5 +140,51 @@ body {
     width: clamp(400px, 90vw, 100rem);
     border-radius: 16px;
     text-align: center;
+    gap: 16px;
+}
+
+
+/* Book items */
+.bookItem {
+    display: grid;
+    gap: 6px;
+    padding: 3rem 0 3rem 0;
+    border-radius: 10px;
+    box-shadow: 2px 4px 8px rgba(36, 21, 50, 0.353);
+    background-color: rgba(189, 163, 202, 0.079);
+    height: 250px;
+}
+
+.bookItem:hover {
+    background-color: rgba(195, 185, 197, 0.123);
+    .remove-button {
+        background-color: rgba(255, 235, 205, 0.079);
+        border: 1px solid white;
+        box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.258);
+        color: aliceblue;
+    }
+
+    .remove-button:hover {
+        background-color: rgba(255, 235, 205, 0.229);
+        background-color: rgba(255, 235, 205, 0.118);
+        cursor: pointer
+}
+
+    .remove-button:active {
+        background-color: rgba(255, 235, 205, 0.188);
+        cursor: pointer;
+        margin: 0.9rem 0 -0.1rem 0;
+    }
+}
+
+
+/* Remove book button */
+.remove-button {
+    background-color: rgba(240, 248, 255, 0);
+    color: rgba(240, 248, 255, 0);
+    border-color: rgba(240, 248, 255, 0);
+    box-shadow: none;
+    font-size: 0.85rem;
+    margin: 0.8rem 0 1rem 0;
 }
 
