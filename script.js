@@ -1,12 +1,11 @@
 // DOM
-const books = document.querySelector('.books');
 const newBookBtn = document.getElementById('new-book');
 const dialog = document.getElementById("dialog");
-const bookTitle = document.getElementById('book-name');
-const bookAuthor = document.getElementById('book-author');
-const bookPages = document.getElementById('book-pages');
-const bookRead = document.getElementById('book-read');
+const form = document.querySelector("form");
 const closeBtn = document.querySelector('.close-button');
+const submitBtn = document.querySelector('.submit-button');
+
+
 
 // Books array
 const myLibrary = [];
@@ -24,19 +23,42 @@ function Book(title, author, pages, read) {
 
 // Display books
 function displayBooks(myLibrary) {
-    for (let book of myLibrary) {
+    const library = document.querySelector('.books');
+    library.innerHTML = '';
+    for (let i = 0; i < myLibrary.length; i++) {
+        const book = myLibrary[i];
         const bookItem = document.createElement('div');
-        bookItem.className = "book-item";
+        bookItem.className = "bookItem";
 
-        const bookTitle = document.createElement('h2');
-        bookTitle.innerText = book;
+        const bookTitle = document.createElement('h1');
+        bookTitle.innerText = `${book.title}`;
+
+        const bookAuthor = document.createElement('h3');
+        bookAuthor.innerText = `${book.author}`;
+
+        const bookPages = document.createElement('p');
+        bookPages.innerText = `(${book.pages} pages total)`;
+
+        const bookRead = document.createElement('h4');
+        bookRead.className = "bookRead";
+        book.read ? bookRead.innerText = "You have read this book." : bookRead.innerText = "You have not read this book yet.";
+
+        const rmvBtn = document.createElement('button');
+        rmvBtn.className = "remove-button";
+        rmvBtn.innerText = "Remove book"
+
+        rmvBtn.addEventListener("on click", () => {
+            removeBook([i]);
+        });
 
         bookItem.appendChild(bookTitle);
-        books.appendChild(bookItem);
+        bookItem.appendChild(bookAuthor);
+        bookItem.appendChild(bookPages);
+        bookItem.appendChild(bookRead);
+        bookItem.appendChild(rmvBtn);
+        library.appendChild(bookItem);
     }
 }
-
-displayBooks(myLibrary);
 
 
 // Add new book form
@@ -44,21 +66,47 @@ newBookBtn.addEventListener("click", () => {
     dialog.showModal();
 });
 
+
 // Form close button
-closeBtn.addEventListener("click", (e) => {
-    e.preventdDefault();
+closeBtn.addEventListener("click", (event) => {
+    event.preventDefault();
     dialog.close();
 });
 
+// Form submit button
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const title = document.getElementById('book-title').value;
+    const author = document.getElementById('book-author').value;
+    const pages = document.getElementById('book-pages').value;
+    const read = document.getElementById('book-read').checked;
+
+    const newBook = new Book(title, author, pages, read);
+    
+    addBookToLibrary(newBook);
+    dialog.close();
+    clearForm();
+
+    // console.log(myLibrary);
+})
 
 
 // Add books to a library array
-function addBookToLibrary(title, author, pages, read) {
+function addBookToLibrary(newBook) {
     // take parameters, create a book and then store it in the array
-    
+    myLibrary.push(newBook);
 
+    displayBooks(myLibrary);
 }
 
+function clearForm() {
+    document.getElementById('book-title').value = '';
+    document.getElementById('book-author').value = '';
+    document.getElementById('book-pages').value = '';
+}
 
-
-// Books: "The Hobbit", "Captain Blood: His Odyssey", "The Black Corsair", "The King in Yellow"
+function removeBook(index) {
+    myLibrary.splice(index, 1);
+    displayBooks();
+}
