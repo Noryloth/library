@@ -11,13 +11,15 @@ const clearBtn = document.querySelector('.clear-button');
 const myLibrary = [];
 
 
-// Book constructor
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.id = crypto.randomUUID();
+// Book class
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.id = crypto.randomUUID();
+}
 }
 
 
@@ -25,6 +27,7 @@ function Book(title, author, pages, read) {
 function displayBooks(myLibrary) {
     const library = document.querySelector('.books');
     library.innerHTML = '';
+    
     for (let i = 0; i < myLibrary.length; i++) {
         const book = myLibrary[i];
         const bookItem = document.createElement('div');
@@ -75,9 +78,9 @@ form.addEventListener("submit", (event) => {
     if (title === '' || author === '' || pages === '') {
         alert('Please, write information about a book.');
     } else {
-    addBookToLibrary(newBook);
-    dialog.close();
-    clearForm();
+        addBookToLibrary(newBook);
+        dialog.close();
+        clearForm();
     }
 });
 
